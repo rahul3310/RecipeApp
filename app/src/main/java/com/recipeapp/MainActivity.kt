@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             RecipeAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Text(text = "Rahul Jangra",
+                    Text(text = "Dev Rahul Jangra",
                         modifier = Modifier.padding(innerPadding))
                 }
             }
