@@ -13,3 +13,10 @@ To run the project on your device, you’ll need to add your **API Key**.
 
    ```properties
    RECIPE_API_KEY = ****************
+
+## Features
+- View Recipe list (All & Popular)
+- Mark recipes as Favorite
+- Get notified for favorite recipes if reminder is set
+- Delete favorites by swiping right to left
+- Search recipes

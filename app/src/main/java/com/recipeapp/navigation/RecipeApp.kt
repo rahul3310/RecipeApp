@@ -103,7 +103,7 @@ private fun BottomNavBar(
     onTabClick: (route: String) -> Unit
 ) {
     NavigationBar(
-        containerColor = BorderColor.copy(0.3f),
+        containerColor = BorderColor,
         tonalElevation = 4.dp
     ) {
         tabs.forEach { tab ->

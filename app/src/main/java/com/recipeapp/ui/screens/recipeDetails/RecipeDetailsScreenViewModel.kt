@@ -35,6 +35,7 @@ class RecipeDetailsScreenViewModel @Inject constructor(
             }
 
             is RecipeDetailsEvents.OnTimeSelected -> {
+                showBottomSheet(false)
                 setNotifyReminder(
                     recipeName = uiState.value.recipeDetails?.recipe?.title ?: "",
                     event.time

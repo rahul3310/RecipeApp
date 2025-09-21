@@ -53,7 +53,7 @@ import com.recipeapp.ui_component.TextLarge
 import com.recipeapp.ui_component.TextMedium
 import com.recipeapp.ui_component.TextSmall
 import recipeassignment.ui.utils.CustomImageButton
-import recipeassignment.ui.utils.LazyColumnCustom
+import com.recipeapp.ui.utils.LazyColumnCustom
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -360,7 +360,7 @@ private fun SimilarRecipeBottomSheet(
                 modifier = Modifier,
                 emptyListContent = {},
                 content = { index, item ->
-                    RecipeCard(recipe = item, modifier = Modifier) {
+                    RecipeCard(recipe = item, modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)) {
                         onRecipeClick(item)
                     }
                 }

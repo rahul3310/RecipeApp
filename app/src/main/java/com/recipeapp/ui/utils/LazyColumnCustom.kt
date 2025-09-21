@@ -1,4 +1,4 @@
-package recipeassignment.ui.utils
+package com.recipeapp.ui.utils
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
