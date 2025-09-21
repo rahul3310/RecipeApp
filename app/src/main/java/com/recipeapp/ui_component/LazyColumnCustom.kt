@@ -12,11 +12,12 @@ fun <T : Any> LazyColumnCustom(
     modifier: Modifier = Modifier,
     items: List<T>,
     content: @Composable ((index: Int, item: T) -> Unit),
-    emptyListContent: @Composable (() -> Unit)
+    emptyListContent: @Composable (() -> Unit),
+    verticalArrangement: Arrangement.Vertical = Arrangement.Top
 ) {
     LazyColumn(
         modifier = modifier,
-        verticalArrangement = Arrangement.Top,
+        verticalArrangement = verticalArrangement,
         horizontalAlignment = Alignment.Start
     ) {
         if (items.isEmpty()) {

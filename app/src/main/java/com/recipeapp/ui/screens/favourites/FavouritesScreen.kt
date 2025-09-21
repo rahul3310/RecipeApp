@@ -1,18 +1,22 @@
 package com.recipeapp.ui.screens.favourites
 
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -24,12 +28,16 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import com.recipeapp.navigation.Screen
 import com.recipeapp.ui.screens.favourites.model.FavouriteUiEvents
+import com.recipeapp.ui.screens.recipeDetails.model.RecipeDetailsEvents
+import com.recipeapp.ui.snackbar.SnackBarWithActon
 import com.recipeapp.ui.theme.BackgroundColorPrimary
 import com.recipeapp.ui.theme.BackgroundColorSecondary
 import com.recipeapp.ui.utils.RecipeCard
 import com.recipeapp.ui_component.LazyColumnCustom
+import com.recipeapp.ui_component.SwipeableCard
 import com.recipeapp.ui_component.TextHeadline
 import com.recipeapp.ui_component.TextMedium
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,6 +48,8 @@ fun FavouritesScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val lifecycleOwner = LocalLifecycleOwner.current
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
         lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -54,6 +64,19 @@ fun FavouritesScreen(
     }
 
     Scaffold(
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackbarHostState,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                SnackBarWithActon(
+                    it,
+                    dismissIcon = Icons.Default.Add
+                ) {
+                    snackbarHostState.currentSnackbarData?.dismiss()
+                }
+            }
+        },
         topBar = {
             TopAppBar(
                 title = {
@@ -71,9 +94,11 @@ fun FavouritesScreen(
 
         LazyColumnCustom(
             modifier = Modifier
+                .padding(top = 16.dp)
                 .fillMaxSize()
                 .padding(paddingValues),
             items = uiState.favouriteRecipeDetails,
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             emptyListContent = {
                 TextMedium(
                     text = "You have not selected any favorite recipe yet.",
@@ -82,13 +107,29 @@ fun FavouritesScreen(
                 )
             },
             content = { index, recipe ->
-                Spacer(modifier = Modifier.height(16.dp))
-                RecipeCard(
-                    recipe,
-                    onRecipeClick = {
-                        viewModel.onRecipeClick(Screen.RecipeDetails.route, recipe.id)
+                SwipeableCard(
+                    item = recipe,
+                    onDeleteClick = {
+                        viewModel.removeFavorites(it.id)
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = "Removed from Favorites",
+                                withDismissAction = false,
+                                duration = SnackbarDuration.Short
+                            )
+                        }
+                    },
+                    content = {
+                        RecipeCard(
+                            recipe,
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                            onRecipeClick = {
+                                viewModel.onRecipeClick(Screen.RecipeDetails.route, recipe.id)
+                            }
+                        )
                     }
                 )
+
             }
         )
     }

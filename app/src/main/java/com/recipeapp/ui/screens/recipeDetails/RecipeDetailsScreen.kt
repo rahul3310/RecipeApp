@@ -107,9 +107,6 @@ fun RecipeDetailScreen(
     recipeDetailViewModel: RecipeDetailsScreenViewModel = hiltViewModel()
 ) {
     val lazyListState = rememberLazyListState()
-    val maxHeight = 300.dp
-    val minHeight = 80.dp
-    val density = LocalDensity.current
 
     // Detect if user has scrolled down
     val isTopBarVisible by remember {

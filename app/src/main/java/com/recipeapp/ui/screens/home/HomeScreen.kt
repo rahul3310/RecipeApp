@@ -125,7 +125,8 @@ fun HomeScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(paddingValues)
+                .padding(paddingValues),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
             stickyHeader {
@@ -163,7 +164,8 @@ fun HomeScreen(
                     )
                 }
                 itemsIndexed(uiState.allRecipes) { index, recipe ->
-                    RecipeCard(recipe) {
+                    RecipeCard(recipe = recipe,
+                        modifier = Modifier.padding(horizontal = 16.dp)) {
                         homeViewModel.onRecipeClick(Screen.RecipeDetails.route, it)
                     }
                 }

@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -18,8 +17,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.ModalBottomSheetDefaults
-import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -34,9 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.recipeapp.ui.theme.BackgroundColorPrimary
 import com.recipeapp.ui.theme.ButtonColorPrimary
-import com.recipeapp.ui_component.TextHeadline
 import com.recipeapp.ui_component.TextMedium
-import com.recipeapp.ui_component.TextSmall
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,18 +89,24 @@ fun CommonBottomSheet(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
-                .background(BackgroundColorPrimary, RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+                .background(
+                    BackgroundColorPrimary,
+                    RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+                )
         ) {
-
             content()
-
+            // sticky button
             if (buttonText != null) {
-                ButtonWithIcon(modifier = Modifier,
-                    buttonText,
+                ButtonWithIcon(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp),
+                    buttonText = buttonText,
                     onButtonClick = {
-                    closeSheet()
-                    onButtonClick()
-                })
+                        closeSheet()
+                        onButtonClick()
+                    }
+                )
             }
         }
 
