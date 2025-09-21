@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Recipe App"
 include(":app")
+include(":network")
+include(":data")
+include(":common")
