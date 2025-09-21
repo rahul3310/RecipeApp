@@ -1,6 +1,8 @@
 package com.recipeapp.navigation
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -9,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -22,6 +25,7 @@ import com.recipeapp.ui.screens.favourites.FavouritesScreen
 import com.recipeapp.ui.screens.home.HomeScreen
 import com.recipeapp.ui.screens.home.LoginScreen
 import com.recipeapp.ui.screens.recipeDetails.RecipeDetailScreen
+import com.recipeapp.ui.theme.BorderColor
 
 @Composable
 fun RecipeApp(
@@ -99,7 +103,7 @@ private fun BottomNavBar(
     onTabClick: (route: String) -> Unit
 ) {
     NavigationBar(
-        containerColor = Color.White,
+        containerColor = BorderColor.copy(0.3f),
         tonalElevation = 4.dp
     ) {
         tabs.forEach { tab ->
