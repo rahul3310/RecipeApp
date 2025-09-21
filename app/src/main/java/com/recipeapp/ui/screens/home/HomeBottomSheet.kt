@@ -357,10 +357,13 @@ private fun SimilarRecipeBottomSheet(
 
             LazyColumnCustom(
                 items = recipes,
-                modifier = Modifier,
+                modifier = Modifier.padding(horizontal = 16.dp),
                 emptyListContent = {},
                 content = { index, item ->
-                    RecipeCard(recipe = item, modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)) {
+                    RecipeCard(
+                        recipe = item,
+                        modifier = Modifier.padding(top = 16.dp)
+                    ) {
                         onRecipeClick(item)
                     }
                 }
