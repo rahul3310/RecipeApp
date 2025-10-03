@@ -3,7 +3,20 @@
 A simple and elegant Recipe App built with Jetpack Compose.  
 To run the project on your device, you’ll need to add your **API Key**.
 
+📹 **App Demo Video** → [Watch here](https://github.com/rahul3310/RecipeApp/issues/1#issue-3481580908)
+
 ---
+
+## 📥 How to Clone the Project
+```
+# Clone the repository
+git clone https://github.com/rahul3310/RecipeApp.git
+
+# Move into the project directory
+cd RecipeApp
+
+# Open in Android Studio and let it sync the Gradle dependencies
+```
 
 ## 🔑 Setup Instructions
 
@@ -13,6 +26,19 @@ To run the project on your device, you’ll need to add your **API Key**.
 
    ```properties
    RECIPE_API_KEY = ****************
+   ```
+## ⚙️ Tech Stack
+
+- Jetpack Compose – Modern UI toolkit
+
+- Hilt – Dependency Injection
+
+- Hilt Worker – For background work injection
+
+- Room Database – Local storage
+
+- MVVM Architecture – Clean architecture pattern
+  
 
 ## Features
 - View Recipe list (All & Popular)
